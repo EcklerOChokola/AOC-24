@@ -10,6 +10,8 @@ All files are organised in the following structure :
 - each day directory will have the sample provided as `sample` and the code in `main.cpp`
 - a `run_main` script at the root
 
+*Note: I try to keep my solutions as smol as possible in terms of source code. If I go over the arbitrary boundary of 1000 bytes of source code one day, I will do my best to create a source file that satisfies it. This source file will have the name `main_obf.cpp` and will be a lot less readable than the original one, yet will function the same way (heavy use of preprocessor, no unnecessary white space, shorter variable names, ...)*
+
 ## Use
 
 Simply use the `run_main` script to run each day
