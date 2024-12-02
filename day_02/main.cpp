@@ -32,6 +32,7 @@ char is_safe(vi r)
 
 char is_safe_dampened(vi r)
 {
+	if (is_safe(r)) return 1;
 	for (int i = 0; i < r.size(); i++)
 	{
 		vi cp = r;
