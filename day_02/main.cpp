@@ -43,7 +43,7 @@ char is_safe_dampened(vi r)
 
 int main(void)
 {
-	vector<vector<int>> input;
+	vector<vi> input;
 	
 	while (true)
 	{
