@@ -1,8 +1,6 @@
 #include<iostream>
-#include<sstream>
 #include<bits/stdc++.h>
 #include<vector>
-#include<regex>
 #if defined(_OPENMP)
 	#include<omp.h>
 #endif
