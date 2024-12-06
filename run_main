@@ -1,11 +1,32 @@
 #!/bin/bash
 
 input=sample
+flags=""
+
+usage () {
+	echo "run_main [options] [input]"
+	echo "Compiles and run the main.cpp file with an input"
+	echo ""
+	echo "options:"
+	echo "	-h | --help => displays this help"
+	echo "	-omp => use openmp to compile"
+	echo ""
+	echo "input:"
+	echo "	the name of the input file (if not specified, defaults to \"sample\")"
+}
 
 if [ $# -gt 0 ]
 then
-	input=$1
+	while test $# != 0
+	do
+	case "$1" in
+		--help | -h) usage ; exit 0;;
+		-omp) flags="$flags -fopenmp";;
+		*) input=$1;;
+	esac
+	shift
+	done
 fi
 
-g++ main.cpp -o main; time cat $input | ./main
+g++ main.cpp $flags -o main && time cat $input | ./main
 
