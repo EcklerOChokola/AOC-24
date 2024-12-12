@@ -40,7 +40,7 @@ int main(void)
 					pair<int, int> new_position = pair(position.first + dx[k], position.second + dy[k]);
 					if(new_position.first >= 0 && new_position.first < map.size() && new_position.second >= 0 && new_position.second < map[i].size() && map[position.first][position.second] == map[new_position.first][new_position.second])
 					{
-						positions.push(pair(new_position.first, new_position.second));
+						positions.push(new_position);
 						region_perimeter--;
 					}
 				}
