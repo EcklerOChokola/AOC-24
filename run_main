@@ -10,10 +10,13 @@ usage () {
 	echo "options:"
 	echo "	-h | --help => displays this help"
 	echo "	-omp => use openmp to compile"
+	echo "	-n | --no-time => do not display the time taken for the solution"
 	echo ""
 	echo "input:"
 	echo "	the name of the input file (if not specified, defaults to \"sample\")"
 }
+
+time=1
 
 if [ $# -gt 0 ]
 then
@@ -22,11 +25,21 @@ then
 	case "$1" in
 		--help | -h) usage ; exit 0;;
 		-omp) flags="$flags -fopenmp";;
+		-n | --no-time) time=0;;
 		*) input=$1;;
 	esac
 	shift
 	done
 fi
 
-g++ main.cpp $flags -o main && time cat $input | ./main
+g++ main.cpp $flags -o main
+
+if [ $? -gt 0 ]; then exit 1; fi
+
+if [ $time -eq 1 ]
+then
+	time cat $input | ./main
+else
+	cat $input | ./main
+fi
 
