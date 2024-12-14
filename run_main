@@ -4,7 +4,7 @@ input=sample
 flags=""
 
 usage () {
-	echo "run_main [options] [input]"
+	echo "run_main [options] [input] [-- args]"
 	echo "Compiles and run the main.cpp file with an input"
 	echo ""
 	echo "options:"
@@ -14,6 +14,8 @@ usage () {
 	echo ""
 	echo "input:"
 	echo "	the name of the input file (if not specified, defaults to \"sample\")"
+	echo ""
+	echo "args: if -- is provided at some point, all following args will be passed to the compiled program at the end"
 }
 
 time=1
@@ -26,11 +28,18 @@ then
 		--help | -h) usage ; exit 0;;
 		-omp) flags="$flags -fopenmp";;
 		-n | --no-time) time=0;;
+		--) args=""; shift; break;;
 		*) input=$1;;
 	esac
 	shift
 	done
 fi
+
+while test $# != 0
+do
+	args="$args $1"
+	shift
+done
 
 g++ main.cpp $flags -o main
 
@@ -38,8 +47,8 @@ if [ $? -gt 0 ]; then exit 1; fi
 
 if [ $time -eq 1 ]
 then
-	time cat $input | ./main
+	time cat $input | ./main $args
 else
-	cat $input | ./main
+	cat $input | ./main $args
 fi
 
